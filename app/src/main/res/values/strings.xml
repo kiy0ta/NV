@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NVSample</string>
+    <string name="category">動物</string>
+    <string name="name">シマリス</string>
+    <string name="profile">プロフィールを見る</string>
+    <string name="follow">フォローする</string>
+    <string name="request">リクエスト</string>
 </resources>
