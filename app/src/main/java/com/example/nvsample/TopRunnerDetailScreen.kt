@@ -13,11 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -89,7 +91,7 @@ fun ButtonItem(text: String) {
 @Composable
 fun PostItems() {
     LazyColumn {
-        items(5) { index ->
+        items(10) { index ->
             PostItem(index = index)
         }
     }
@@ -115,9 +117,88 @@ fun PostItem(index: Int) {
                 .fillMaxHeight()
         ) {
             // 1段目
-
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.name),
+                    color = colorResource(id = R.color.white),
+                    fontSize = 10.sp
+                )
+                Text(
+                    text = stringResource(id = R.string.category),
+                    color = colorResource(id = R.color.white),
+                    fontSize = 10.sp
+                )
+                Text(
+                    text = "4時間前",
+                    color = colorResource(id = R.color.white),
+                    fontSize = 10.sp,
+                    textAlign = TextAlign.End
+                )
+            }
             // 2段目
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                Text(
+                    text = "タイトルが入ります",
+                    color = colorResource(id = R.color.white),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1
+                )
+            }
             // 3段目
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                Text(
+                    text = "04:44",
+                    modifier = Modifier
+                        .background(
+                            color = colorResource(id = R.color.red_60),
+                            shape = RoundedCornerShape(50)
+                        )
+                        .padding(vertical = 2.dp, horizontal = 4.dp),
+                    color = colorResource(id = R.color.white),
+                    fontSize = 12.sp
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ic_comment),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clip(CircleShape)
+                        .padding(2.dp),
+                    colorFilter = ColorFilter.tint(colorResource(id = R.color.red))
+                )
+                Text(
+                    text = "999",
+                    color = colorResource(id = R.color.white),
+                    fontSize = 10.sp
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ic_like),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clip(CircleShape)
+                        .padding(2.dp),
+                    colorFilter = ColorFilter.tint(colorResource(id = R.color.red))
+                )
+                Text(
+                    text = "99,999",
+                    color = colorResource(id = R.color.white),
+                    fontSize = 10.sp
+                )
+            }
         }
     }
 }
