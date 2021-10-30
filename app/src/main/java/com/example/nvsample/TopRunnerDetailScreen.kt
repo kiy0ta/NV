@@ -36,13 +36,22 @@ fun TopRunnerDetailScreen() {
             contentScale = ContentScale.Crop
         )
 
-        Column(modifier = Modifier.fillMaxSize().background(
-            Brush.linearGradient(
-                colors = listOf(Color.Transparent,Color.Black),
-                start = Offset.Zero, end = Offset.Infinite
-            )
-        )) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.linearGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        start = Offset.Zero, end = Offset.Infinite
+                    )
+                )
+        ) {
             TopRunnerInfo()
+            Spacer(
+                modifier = Modifier
+                    .height(6.dp)
+                    .fillMaxWidth()
+            )
             PostItems()
         }
     }
@@ -51,7 +60,7 @@ fun TopRunnerDetailScreen() {
 @Composable
 fun TopRunnerInfo() {
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Spacer(modifier = Modifier.height(200.dp))
+        Spacer(modifier = Modifier.height(300.dp))
         Text(
             text = stringResource(id = R.string.category),
             color = colorResource(id = R.color.white),
@@ -59,16 +68,23 @@ fun TopRunnerInfo() {
         )
         Text(
             text = stringResource(id = R.string.name),
+            modifier = Modifier.padding(top = 2.dp),
             color = colorResource(id = R.color.white),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
             text = stringResource(id = R.string.profile),
+            modifier = Modifier.padding(top = 6.dp),
             color = colorResource(id = R.color.red),
             fontSize = 10.sp
         )
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 6.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
             ButtonItem(stringResource(id = R.string.follow))
             ButtonItem(stringResource(id = R.string.request))
         }
@@ -80,9 +96,9 @@ fun ButtonItem(text: String) {
     Text(
         text = text,
         modifier = Modifier
-            .padding(16.dp)
+            .padding(6.dp)
             .border(
-                width = 0.5.dp,
+                width = 2.dp,
                 color = colorResource(id = R.color.red),
                 shape = RoundedCornerShape(50)
             )
@@ -92,33 +108,54 @@ fun ButtonItem(text: String) {
             )
             .padding(vertical = 8.dp, horizontal = 16.dp),
         color = colorResource(id = R.color.red),
-        fontSize = 12.sp
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold
     )
 }
 
 @Composable
 fun PostItems() {
-    LazyColumn{
-        items(10) { index ->
-            PostItem(index = index)
+    LazyColumn {
+        items(10) { _ ->
+            PostItem()
+            Spacer(
+                modifier = Modifier
+                    .height(0.5.dp)
+                    .fillMaxWidth()
+                    .background(
+                        color = colorResource(
+                            id = R.color.gray
+                        )
+                    )
+            )
         }
     }
 }
 
 @Composable
-fun PostItem(index: Int) {
+fun PostItem() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)
+            .height(96.dp)
+            .padding(start = 8.dp, end = 16.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_face),
-            contentDescription = null,
+        Column(
             modifier = Modifier
                 .weight(1f)
-                .clip(CircleShape)
-        )
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_face),
+                contentDescription = null,
+                modifier = Modifier
+                    .clip(CircleShape)
+            )
+        }
+        Spacer(modifier = Modifier
+            .fillMaxHeight()
+            .width(8.dp))
         Column(
             modifier = Modifier
                 .weight(6f)
@@ -129,19 +166,24 @@ fun PostItem(index: Int) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
+                    .padding(bottom = 6.dp),
+                verticalAlignment = Alignment.Bottom
             ) {
                 Text(
                     text = stringResource(id = R.string.name),
                     color = colorResource(id = R.color.white),
-                    fontSize = 10.sp
+                    fontSize = 11.sp
                 )
                 Text(
                     text = stringResource(id = R.string.category),
+                    modifier = Modifier.padding(start = 8.dp),
                     color = colorResource(id = R.color.white),
-                    fontSize = 10.sp
+                    fontSize = 9.sp,
+                    textAlign = TextAlign.Center
                 )
                 Text(
                     text = "4時間前",
+                    modifier = Modifier.padding(start = 200.dp),
                     color = colorResource(id = R.color.white),
                     fontSize = 10.sp,
                     textAlign = TextAlign.End
@@ -154,9 +196,9 @@ fun PostItem(index: Int) {
                     .weight(1f)
             ) {
                 Text(
-                    text = "タイトルが入ります",
+                    text = "Androidの学習方法について",
                     color = colorResource(id = R.color.white),
-                    fontSize = 20.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1
                 )
@@ -165,7 +207,8 @@ fun PostItem(index: Int) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                verticalAlignment = Alignment.Top
             ) {
                 Text(
                     text = "04:44",
@@ -174,35 +217,43 @@ fun PostItem(index: Int) {
                             color = colorResource(id = R.color.red_60),
                             shape = RoundedCornerShape(50)
                         )
-                        .padding(vertical = 2.dp, horizontal = 4.dp),
+                        .padding(vertical = 4.dp, horizontal = 8.dp),
                     color = colorResource(id = R.color.white),
-                    fontSize = 12.sp
+                    fontSize = 10.sp
                 )
+                Spacer(modifier = Modifier.width(60.dp))
                 Image(
                     painter = painterResource(id = R.drawable.ic_comment),
                     contentDescription = null,
-                    modifier = Modifier
-                        .weight(1f)
-                        .clip(CircleShape)
-                        .padding(2.dp),
+                    modifier = Modifier.padding(
+                        start = 5.dp,
+                        top = 2.dp,
+                        end = 5.dp,
+                        bottom = 10.dp
+                    ),
                     colorFilter = ColorFilter.tint(colorResource(id = R.color.red))
                 )
                 Text(
                     text = "999",
+                    modifier = Modifier.padding(start = 4.dp, top = 4.dp),
                     color = colorResource(id = R.color.white),
                     fontSize = 10.sp
                 )
+                Spacer(modifier = Modifier.width(32.dp))
                 Image(
                     painter = painterResource(id = R.drawable.ic_like),
                     contentDescription = null,
-                    modifier = Modifier
-                        .weight(1f)
-                        .clip(CircleShape)
-                        .padding(2.dp),
+                    modifier = Modifier.padding(
+                        start = 5.dp,
+                        top = 2.dp,
+                        end = 5.dp,
+                        bottom = 12.dp
+                    ),
                     colorFilter = ColorFilter.tint(colorResource(id = R.color.red))
                 )
                 Text(
                     text = "99,999",
+                    modifier = Modifier.padding(start = 4.dp, top = 4.dp),
                     color = colorResource(id = R.color.white),
                     fontSize = 10.sp
                 )
